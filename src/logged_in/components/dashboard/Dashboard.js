@@ -2,6 +2,7 @@ import React, { Fragment, PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Typography, Box } from "@material-ui/core";
 import SettingsArea from "./SettingsArea";
+// import Demodata fro../demodata/demodataata";
 import UserDataArea from "./UserDataArea";
 import AccountInformationArea from "./AccountInformationArea";
 import StatisticsArea from "./StatisticsArea";
@@ -43,6 +44,12 @@ class Dashboard extends PureComponent {
           pushMessageToSnackbar={pushMessageToSnackbar}
           targets={targets}
         />
+        {/* <Box mt={4}>
+          <Typography variant="subtitle1" gutterBottom>
+            Demodata
+          </Typography>
+        </Box> */}
+        {/* <Demodata /> */}
       </Fragment>
     );
   }

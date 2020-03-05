@@ -24,6 +24,7 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import ImageIcon from "@material-ui/icons/Image";
 import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
+import AttachMoneyTwoTone from "@material-ui/icons/AttachMoneyTwoTone";
 import MenuIcon from "@material-ui/icons/Menu";
 import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 import MessagePopperButton from "./MessagePopperButton";
@@ -210,6 +211,43 @@ class NavBar extends PureComponent {
         }
       },
       {
+        link: "/c/demopanel",
+        name: "Demo",
+        onClick: () => {
+          this.closeMobileDrawer();
+        },
+        icon: {
+          desktop: (
+            <div>
+              <AttachMoneyTwoTone
+                className={
+                  selectedTab === "Demo"
+                    ? classes.textPrimary
+                    : "text-white"
+                }
+                fontSize="small"
+            />
+            <AttachMoneyTwoTone
+                style={{marginLeft: -10}}
+                className={
+                  selectedTab === "Demo"
+                    ? classes.textPrimary
+                    : "text-white"
+                }
+                fontSize="small"
+            />
+            </div>
+            
+          ),
+          mobile: (
+            <div>
+              <AttachMoneyTwoTone className="text-white"/>
+              <AttachMoneyTwoTone style={{marginLeft: -10}} className="text-white"/>
+            </div>
+          )
+        }
+      },
+      {
         link: "/",
         name: "Logout",
         icon: {
@@ -218,7 +256,7 @@ class NavBar extends PureComponent {
           ),
           mobile: <PowerSettingsNewIcon className="text-white" />
         }
-      }
+      },
     ];
     return (
       <Fragment>

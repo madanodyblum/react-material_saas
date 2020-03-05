@@ -278,6 +278,14 @@ class Main extends PureComponent {
     });
   };
 
+  selectDemo = () => {
+    smoothScrollTop();
+    document.title = "WaVer - Subscription";
+    this.setState({
+      selectedTab: "Demo"
+    });
+  };
+
   render() {
     const { classes } = this.props;
     const {
@@ -320,6 +328,7 @@ class Main extends PureComponent {
             selectDashboard={this.selectDashboard}
             selectPosts={this.selectPosts}
             selectSubscription={this.selectSubscription}
+            selectDemo={this.selectDemo}
           />
         </main>
       </Fragment>

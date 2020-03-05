@@ -4,6 +4,7 @@ import { Switch } from "react-router-dom";
 import { withStyles } from "@material-ui/core";
 import Dashboard from "./dashboard/Dashboard";
 import Posts from "./posts/Posts";
+import Demo from "./demo/Demo";
 import Subscription from "./subscription/Subscription";
 import PropsRoute from "../../shared/components/PropsRoute";
 
@@ -62,7 +63,8 @@ function Routing(props) {
     isAccountActivated,
     selectDashboard,
     selectPosts,
-    selectSubscription
+    selectSubscription,
+    selectDemo
   } = props;
   return (
     <div className={classes.wrapper}>
@@ -84,6 +86,13 @@ function Routing(props) {
           transactions={transactions}
           pushMessageToSnackbar={pushMessageToSnackbar}
           selectSubscription={selectSubscription}
+        />
+        <PropsRoute
+          path="/c/demopanel"
+          component={Demo}
+          transactions={transactions}
+          // pushMessageToSnackbar={pushMessageToSnackbar}
+          selectDemo={selectDemo}
         />
         <PropsRoute
           path=""
@@ -123,7 +132,8 @@ Routing.propTypes = {
   isAccountActivated: PropTypes.bool.isRequired,
   selectDashboard: PropTypes.func.isRequired,
   selectPosts: PropTypes.func.isRequired,
-  selectSubscription: PropTypes.func.isRequired
+  selectSubscription: PropTypes.func.isRequired,
+  selectDemo: PropTypes.func.isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(Routing);
