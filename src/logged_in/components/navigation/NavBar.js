@@ -162,7 +162,7 @@ class NavBar extends PureComponent {
   
   getWalletValue = () => {
     const { offerCost } = this.props;
-    return 2375-Number(offerCost);
+    return 2375-Number(offerCost)*100;
   }
 
   render() {
