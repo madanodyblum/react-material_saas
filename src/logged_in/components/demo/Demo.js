@@ -101,7 +101,6 @@ reSetTime = (id) => {
   let timeOut = this.state.timeOut;
   let resetTime = [];
   let offerCost = '';
-  console.log('1111222333', timeOut);
   let totalCost = this.state.totalCost;
   timeOut.map((time, index)=>{
     if(index===id){
