@@ -41,7 +41,8 @@ class Main extends PureComponent {
     posts: [],
     targets: [],
     messages: [],
-    isAccountActivated: false
+    isAccountActivated: false,
+    offerCost: ''
   };
 
   componentDidMount() {
@@ -286,6 +287,10 @@ class Main extends PureComponent {
     });
   };
 
+  selectOffer = (offerCost) => {
+    this.setState({offerCost: offerCost})
+  };
+
   render() {
     const { classes } = this.props;
     const {
@@ -300,11 +305,12 @@ class Main extends PureComponent {
       posts,
       targets,
       isAccountActivated,
-      messages
+      messages,
+      offerCost
     } = this.state;
     return (
       <Fragment>
-        <NavBar selectedTab={selectedTab} messages={messages} />
+        <NavBar selectedTab={selectedTab} messages={messages} offerCost={offerCost} />
         <ConsecutiveSnackbarMessages
           getPushMessageFromChild={this.getPushMessageFromChild}
         />
@@ -329,6 +335,7 @@ class Main extends PureComponent {
             selectPosts={this.selectPosts}
             selectSubscription={this.selectSubscription}
             selectDemo={this.selectDemo}
+            selectOffer={(offerCost)=>this.selectOffer(offerCost)}
           />
         </main>
       </Fragment>

@@ -45,17 +45,80 @@ const styles = {
 };
 
 class Demo extends PureComponent {
-  componentDidMount() {
-    const { selectDemo } = this.props;
-    selectDemo();
-  }
 
-  render() {
+  constructor(props) {
+    super(props);
+    this.state = {  
+        demodata: demodata.offers,
+        timeOut: [],
+        totalCost: 0
+    };
+}
+componentWillUnmount() {
+  this._isMounted = false;
+}
+componentDidMount() {
+  const { selectDemo } = this.props;
+  selectDemo();
+  this.setTimeout();
+}
+  
+setTimeout = () =>{
+  this._isMounted = true;
+ 
+    let demodataArray = this.state.demodata;
+    let timeOut = [];
+    demodataArray.map((data, index) => {
+      timeOut.push(data.offer.time);
+      return data;
+    })
+    if(this._isMounted){
+      this.setState({timeOut: timeOut})
+    }
+    let time_count = [];
+    setInterval(() => {
+      timeOut = this.state.timeOut;
+      timeOut.map((time, index) => {
+        if(time!==0){
+          time--;
+        }
+        time_count.push(time)
+        return time;
+      })
+      timeOut = time_count;
+      time_count = [];
+      if(this._isMounted){
+        this.setState({timeOut: timeOut})
+      }
+  }, 1000);
+}
+
+reSetTime = (id) => {
+  let demodata = this.state.demodata
+  let timeOut = this.state.timeOut;
+  let resetTime = [];
+  let offerCost = '';
+  let totalCost = this.state.totalCost;
+  demodata.map((data, index) => {
+    if(index===id){
+      offerCost = data.offer.cost;
+      resetTime.push(data.offer.time);
+    }else{
+      resetTime.push(timeOut[id]);
+    }
+    return data;
+  })
+  totalCost += parseFloat(offerCost);
+  this.setState({timeOut: resetTime, totalCost: totalCost})
+  this.props.selectOffer(totalCost);
+}
+
+render() {
     const { classes } = this.props;
     return (
       <Container className={classes.wrapper}>
         <GridList style={{width: "100%", padding: 10}} cols={2}>
-        {demodata.offers.map((data, index) => (
+        {this.state.demodata.map((data, index) => (
             <GridListTile  className={classes.databody} key={index}>
                 <div>
                     <span>Keywords: </span>
@@ -76,12 +139,12 @@ class Demo extends PureComponent {
                 </div>
                 <div className={classes.costinfo}>
                     <Grid item xs={12} sm={6}>
-                        <Button variant="contained" color="primary">
+                        <Button variant="contained" color="primary" onClick={()=>this.reSetTime(index)}>
                             <span className={classes.buy}>BUY</span><span>${data.offer.cost}</span>
                         </Button>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <div className={classes.timeout}><span style={{marginTop: 15}}>Timeout: {data.offer.time}</span></div>
+                        <div className={classes.timeout}><span style={{marginTop: 15}}>Timeout: {this.state.timeOut[index]}</span></div>
                         <div className={classes.payout}><span>Max Payout: {data.offer.payout}</span></div>
                     </Grid>
                 </div>

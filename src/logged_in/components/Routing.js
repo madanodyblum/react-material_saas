@@ -64,7 +64,8 @@ function Routing(props) {
     selectDashboard,
     selectPosts,
     selectSubscription,
-    selectDemo
+    selectDemo,
+    selectOffer
   } = props;
   return (
     <div className={classes.wrapper}>
@@ -91,8 +92,8 @@ function Routing(props) {
           path="/c/demopanel"
           component={Demo}
           transactions={transactions}
-          // pushMessageToSnackbar={pushMessageToSnackbar}
           selectDemo={selectDemo}
+          selectOffer={(offerCost)=>selectOffer(offerCost)}
         />
         <PropsRoute
           path=""
@@ -133,7 +134,8 @@ Routing.propTypes = {
   selectDashboard: PropTypes.func.isRequired,
   selectPosts: PropTypes.func.isRequired,
   selectSubscription: PropTypes.func.isRequired,
-  selectDemo: PropTypes.func.isRequired
+  selectDemo: PropTypes.func.isRequired,
+  selectOffer: PropTypes.func.isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(Routing);

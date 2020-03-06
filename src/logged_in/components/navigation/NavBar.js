@@ -32,6 +32,7 @@ import SideDrawer from "./SideDrawer";
 import Balance from "./Balance";
 import NavigationDrawer from "../../../shared/components/NavigationDrawer";
 import profilePicture from "../../dummy_data/images/profilePicture.jpg";
+import demodata from '../demo/screen_offer';
 
 const styles = theme => ({
   appBar: {
@@ -129,7 +130,7 @@ const styles = theme => ({
 });
 
 class NavBar extends PureComponent {
-  state = { mobileOpen: false, sideDrawerOpen: false };
+  state = { mobileOpen: false, sideDrawerOpen: false};
 
   // Will be use to make website more accessible by screen readers
   links = [];
@@ -149,6 +150,20 @@ class NavBar extends PureComponent {
   openDrawer = () => {
     this.setState({ sideDrawerOpen: true });
   };
+
+  getLastPayOut = () => {
+    let maxValue = [];
+    demodata.offers.map((data, index) => {
+      maxValue.push(Number(data.offer.payout));
+      return data;
+    })
+    return Math.max.apply(null, maxValue)*100;
+  }
+  
+  getWalletValue = () => {
+    const { offerCost } = this.props;
+    return 2375-Number(offerCost);
+  }
 
   render() {
     const { mobileOpen, sideDrawerOpen } = this.state;
@@ -298,13 +313,13 @@ class NavBar extends PureComponent {
               <Typography color="textPrimary" style={{padding: "0 30px"}}>Last Payout:</Typography>
               {isWidthUp("sm", width) && (
                 <Box mr={3}>
-                  <Balance balance={2573} />
+                  <Balance balance={this.getLastPayOut()} />
                 </Box>
               )}
               <Typography color="textPrimary" style={{padding: "0 30px"}}>Wallet:</Typography>
               {isWidthUp("sm", width) && (
                 <Box mr={3}>
-                  <Balance balance={2573} />
+                  <Balance balance={this.getWalletValue()} />
                 </Box>
               )}
               {/* {isWidthUp("sm", width) && (
