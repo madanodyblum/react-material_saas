@@ -12,8 +12,8 @@
                "all"
             ],
             "cost":"2",
-            "time":"60",
-            "payout":"20",
+            "time":"9",
+            "payout":"12",
             "offerid":"12344"
          }
       },
@@ -30,7 +30,7 @@
                "Korea"
             ],
             "cost":"1",
-            "time":"200",
+            "time":"15",
             "payout":"5",
             "offerid":"12345"
          }
@@ -49,7 +49,7 @@
                "Germany"
             ],
             "cost":"5",
-            "time":"100",
+            "time":"10",
             "payout":"50",
             "offerid":"12346"
          }

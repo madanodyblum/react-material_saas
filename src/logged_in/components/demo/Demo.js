@@ -51,7 +51,8 @@ class Demo extends PureComponent {
     this.state = {  
         demodata: demodata.offers,
         timeOut: [],
-        totalCost: 0
+        totalCost: 0,
+        originTime: []
     };
 }
 componentWillUnmount() {
@@ -65,7 +66,6 @@ componentDidMount() {
   
 setTimeout = () =>{
   this._isMounted = true;
- 
     let demodataArray = this.state.demodata;
     let timeOut = [];
     demodataArray.map((data, index) => {
@@ -73,7 +73,7 @@ setTimeout = () =>{
       return data;
     })
     if(this._isMounted){
-      this.setState({timeOut: timeOut})
+      this.setState({timeOut: timeOut, originTime: timeOut})
     }
     let time_count = [];
     setInterval(() => {
@@ -81,6 +81,8 @@ setTimeout = () =>{
       timeOut.map((time, index) => {
         if(time!==0){
           time--;
+        }else{
+          // time=0;
         }
         time_count.push(time)
         return time;
@@ -94,17 +96,24 @@ setTimeout = () =>{
 }
 
 reSetTime = (id) => {
+  let originTime = this.state.originTime;
   let demodata = this.state.demodata
   let timeOut = this.state.timeOut;
   let resetTime = [];
   let offerCost = '';
+  console.log('1111222333', timeOut);
   let totalCost = this.state.totalCost;
+  timeOut.map((time, index)=>{
+    if(index===id){
+      resetTime.push(originTime[id]);
+    }else{
+      resetTime.push(time);
+    }
+    return time;
+  })
   demodata.map((data, index) => {
     if(index===id){
       offerCost = data.offer.cost;
-      resetTime.push(data.offer.time);
-    }else{
-      resetTime.push(timeOut[id]);
     }
     return data;
   })
